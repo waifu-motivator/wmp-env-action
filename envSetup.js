@@ -3,7 +3,6 @@ const core = require('@actions/core');
 const exec = require('@actions/exec');
 
 // RELEASE_NOTES
-// VERSION
 // PUBLISH_CHANNEL
 
 function requireNonNull(toBeNotNull, message) {
@@ -13,12 +12,15 @@ function requireNonNull(toBeNotNull, message) {
   return toBeNotNull;
 }
 
-function getVersion(githubRef) {
-  const from = githubRef.lastIndexOf('/');
-  if(from < 0) {
-    throw Error(`Expected the branch name ${githubRef} to match pattern <release>/<versionNumber>`)
+function getVersionAndPublishChannel(githubRef) {
+  const [,,channel,version] = githubRef.split('/');
+  if(!(channel && version)) {
+    throw Error(`Expected the branch name ${githubRef} to match pattern refs/head/<releaseChannel>/<versionNumber>`)
   }
-  return githubRef.substr(from + 1);
+  return {
+    channel,
+    version
+  };
 }
 
 async function setUpNonProd() {
@@ -27,8 +29,12 @@ async function setUpNonProd() {
     process.env.GITHUB_REF,
     'Expected environment GITHUB_REF to be defined!'
   );
-  const version = getVersion(githubRef)
+  const {
+    version,
+    channel
+  } = getVersionAndPublishChannel(githubRef)
   core.exportVariable('VERSION', version);
+  core.exportVariable('PUBLISH_CHANNEL', channel);
   core.exportVariable('ayylmao', 'ayyLmao its a prank');
 }
 
