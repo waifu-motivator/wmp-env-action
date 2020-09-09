@@ -1,13 +1,10 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'Release Environment Setup'
+description: 'Sets up the environment for releasing the Waifu Motivator Plugin'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  relase-type:
+    description: 'The environment to set up for'
     required: true
-    default: '1000'
-outputs:
-  time: # output will be available to future steps
-    description: 'The message to output'
+    default: 'non-prod'
 runs:
   using: 'node12'
   main: 'dist/index.js'
