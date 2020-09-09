@@ -23,3 +23,6 @@ jobs:
     - uses: ./
       with:
         release-type: non-prod
+      env:
+        GITHUB_REF: development/v1.3
+    - run: echo "$VERSION"

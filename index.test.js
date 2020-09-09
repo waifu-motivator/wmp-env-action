@@ -12,10 +12,18 @@ describe('Set Environment', function () {
       .toThrow('Unknown environment ayyLmao, expecting \'non-prod\' or \'prod\'');
   });
 
+  test('non-prod should complain when no GITHUB_REF is set', async () => {
+    await expect(envSetUp('non-prod'))
+      .rejects
+      .toThrow('Expected environment GITHUB_REF to be defined!')
+  });
+
   test('non-prod should setup correctly', async () => {
+    process.env.GITHUB_REF = 'development/v1.3'
     await expect(envSetUp('non-prod')).resolves
       .toBeUndefined()
-    expect(process.env.ayylmao).toEqual('ayyLmao')
+    expect(process.env.ayylmao).toEqual('ayyLmao its a prank')
+    expect(process.env.VERSION).toEqual('v1.3')
   });
 
 // shows how the runner will run a javascript action with env / stdout protocol
