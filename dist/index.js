@@ -3231,9 +3231,9 @@ async function setUpNonProd() {
     version,
     channel
   } = getVersionAndPublishChannel(githubRef)
-  core.info(`Releasing with version ${version}`)
+  core.info(`Releasing with version '${version}'`)
   core.exportVariable('VERSION', version);
-  core.info(`And on channel${channel}`)
+  core.info(`And on channel '${channel}'`)
   core.exportVariable('PUBLISH_CHANNEL', channel);
   const releaseNotes = getReleaseNotes()
   core.info(`With release notes
@@ -3277,7 +3277,7 @@ async function run() {
 
     await envSetUp(environmentToSetUp);
 
-    core.info(`Enviroment set up!`);
+    core.info(`Environment setup is now complete!`);
 
   } catch (error) {
     core.setFailed(error.message);

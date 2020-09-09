@@ -11,7 +11,7 @@ async function run() {
 
     await envSetUp(environmentToSetUp);
 
-    core.info(`Enviroment set up!`);
+    core.info(`Environment setup is now complete!`);
 
   } catch (error) {
     core.setFailed(error.message);

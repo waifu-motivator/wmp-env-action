@@ -87,12 +87,12 @@ Users shouldn't consume the action from master since that would be latest code a
 Checkin to the v1 release branch
 
 ```bash
-git checkout -b v1
+git checkout -b v1.0.0
 git commit -a -m "v1 release"
 ```
 
 ```bash
-git push origin v1
+git push origin v1.0.0
 ```
 
 The action is now published! :rocket:
