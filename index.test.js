@@ -13,13 +13,16 @@ describe('Set Environment', function () {
   });
 
   test('non-prod should complain when no GITHUB_REF is set', async () => {
+    const previousRef = process.env.GITHUB_REF;
+    delete process.env.GITHUB_REF;
     await expect(envSetUp('non-prod'))
       .rejects
       .toThrow('Expected environment GITHUB_REF to be defined!')
+    process.env.GITHUB_REF = previousRef;
   });
 
   test('non-prod should setup correctly', async () => {
-    process.env.GITHUB_REF = 'development/v1.3'
+    process.env.GITHUB_REF = 'refs/heads/development/v1.3'
     await expect(envSetUp('non-prod')).resolves
       .toBeUndefined()
     expect(process.env.ayylmao).toEqual('ayyLmao its a prank')
