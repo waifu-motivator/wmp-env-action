@@ -1,9 +1,6 @@
 const core = require('@actions/core');
-// const fs = require('fs');
-const exec = require('@actions/exec');
 
 // RELEASE_NOTES
-// PUBLISH_CHANNEL
 
 function requireNonNull(toBeNotNull, message) {
   if(!toBeNotNull) {
@@ -24,7 +21,6 @@ function getVersionAndPublishChannel(githubRef) {
 }
 
 async function setUpNonProd() {
-  await exec.exec('ls', ['-la']);
   const githubRef = requireNonNull(
     process.env.GITHUB_REF,
     'Expected environment GITHUB_REF to be defined!'
@@ -39,7 +35,7 @@ async function setUpNonProd() {
 }
 
 function setUpProd() {
-  return Promise.resolve(undefined);
+  throw Error('Production environment setup not available yet!');
 }
 
 const envSetup = async environmentToSetUp => {
