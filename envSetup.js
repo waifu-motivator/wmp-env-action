@@ -16,7 +16,7 @@ function getVersionAndPublishChannel(githubRef) {
   }
   return {
     channel,
-    version
+    version: `${version}.beta.${new Date().valueOf().toString(32)}`
   };
 }
 
@@ -29,9 +29,13 @@ async function setUpNonProd() {
     version,
     channel
   } = getVersionAndPublishChannel(githubRef)
+  core.info(`Releasing with version ${version}`)
   core.exportVariable('VERSION', version);
+  core.info(`And on channel${channel}`)
   core.exportVariable('PUBLISH_CHANNEL', channel);
-  core.exportVariable('ayylmao', 'ayyLmao its a prank');
+  const releaseNotes = 'ayylmao'
+  core.info(`With release notes
+  ${releaseNotes}`)
 }
 
 function setUpProd() {

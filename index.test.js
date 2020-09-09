@@ -50,8 +50,7 @@ describe('Set Environment', function () {
     setInput('branch-override', 'refs/heads/development/v69')
     await expect(envSetUp('non-prod')).resolves
       .toBeUndefined()
-    expect(process.env.ayylmao).toEqual('ayyLmao its a prank')
-    expect(process.env.VERSION).toEqual('v69')
+    expect(process.env.VERSION).toContain('v69')
     expect(process.env.PUBLISH_CHANNEL).toEqual('development')
     unsetInput('branch-override');
   });
@@ -60,8 +59,7 @@ describe('Set Environment', function () {
     process.env.GITHUB_REF = 'refs/heads/development/v1.3'
     await expect(envSetUp('non-prod')).resolves
       .toBeUndefined()
-    expect(process.env.ayylmao).toEqual('ayyLmao its a prank')
-    expect(process.env.VERSION).toEqual('v1.3')
+    expect(process.env.VERSION).toContain('v1.3')
     expect(process.env.PUBLISH_CHANNEL).toEqual('development')
   });
 });
