@@ -5,7 +5,7 @@ const envSetUp = require('./envSetup');
 
 describe('Set Environment', function () {
 
-  test('throws invalid number', async () => {
+  test('throws invalid environment', async () => {
     await expect(envSetUp('ayyLmao'))
       .rejects
       .toThrow('Unknown environment ayyLmao, expecting \'non-prod\' or \'prod\'');
