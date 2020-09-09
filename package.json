@@ -1,7 +1,7 @@
 {
-  "name": "javascript-action",
+  "name": "waifu-motivator-plugin-release-env-setup-action",
   "version": "1.0.0",
-  "description": "JavaScript Action Template",
+  "description": "Action for setting up the Waifu Motivator Plugin release train",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",

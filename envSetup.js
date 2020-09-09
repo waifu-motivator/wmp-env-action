@@ -1,8 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-// RELEASE_NOTES
-
 function requireNonNull(toBeNotNull, message) {
   if(!toBeNotNull) {
     throw Error(message);
@@ -26,7 +24,7 @@ function getReleaseNotes() {
     const pushPayload = github.context.payload
     const commits = pushPayload.commits || []
     return commits
-      .map(commit => `-${JSON.stringify(commit, null, 2)}`)
+      .map(commit => `- ${commit.message}`)
       .join('\n');
   }
 
@@ -49,6 +47,7 @@ async function setUpNonProd() {
   const releaseNotes = getReleaseNotes()
   core.info(`With release notes
   ${releaseNotes}`)
+  core.exportVariable('RELEASE_NOTES', releaseNotes)
 }
 
 function setUpProd() {

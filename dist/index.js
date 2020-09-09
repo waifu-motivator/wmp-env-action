@@ -3192,8 +3192,6 @@ module.exports = safer
 const core = __webpack_require__(2186);
 const github = __webpack_require__(5438);
 
-// RELEASE_NOTES
-
 function requireNonNull(toBeNotNull, message) {
   if(!toBeNotNull) {
     throw Error(message);
@@ -3217,7 +3215,7 @@ function getReleaseNotes() {
     const pushPayload = github.context.payload
     const commits = pushPayload.commits || []
     return commits
-      .map(commit => `-${JSON.stringify(commit, null, 2)}`)
+      .map(commit => `- ${commit.message}`)
       .join('\n');
   }
 
@@ -3240,6 +3238,7 @@ async function setUpNonProd() {
   const releaseNotes = getReleaseNotes()
   core.info(`With release notes
   ${releaseNotes}`)
+  core.exportVariable('RELEASE_NOTES', releaseNotes)
 }
 
 function setUpProd() {
@@ -3273,9 +3272,12 @@ const envSetUp = __webpack_require__(4928);
 async function run() {
   try {
     const environmentToSetUp = core.getInput('release-type');
+
     core.info(`Setting up environment for ${environmentToSetUp} ...`);
 
     await envSetUp(environmentToSetUp);
+
+    core.info(`Enviroment set up!`);
 
   } catch (error) {
     core.setFailed(error.message);

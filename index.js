@@ -6,9 +6,12 @@ const envSetUp = require('./envSetup');
 async function run() {
   try {
     const environmentToSetUp = core.getInput('release-type');
+
     core.info(`Setting up environment for ${environmentToSetUp} ...`);
 
     await envSetUp(environmentToSetUp);
+
+    core.info(`Enviroment set up!`);
 
   } catch (error) {
     core.setFailed(error.message);

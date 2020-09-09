@@ -1,18 +1,16 @@
-# Create a JavaScript Action
+## Waifu Motivator Plugin Release Enivroment Set Action
 
 <p align="center">
   <a href="https://github.com/actions/javascript-action/actions"><img alt="javscript-action status" src="https://github.com/actions/javascript-action/workflows/units-test/badge.svg"></a>
 </p>
 
-Use this template to bootstrap the creation of a JavaScript action.:rocket:
+Use this JavaScript action bootstraps the environment of the [Waifu Motivator Plugin](https://github.com/zd-zero/waifu-motivator-plugin).:rocket:
 
-This template includes tests, linting, a validation workflow, publishing, and versioning guidance.
+# Developer Notes
+
+This action includes tests, linting, a validation workflow, publishing, and versioning guidance.
 
 If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
-
-## Create an action from this template
-
-Click the `Use this Template` and provide the new repo details for your action
 
 ## Code in Main
 
@@ -34,7 +32,7 @@ $ npm test
 ...
 ```
 
-## Change action.yml
+## The action.yml
 
 The action.yml contains defines the inputs and output for your action.
 
@@ -42,7 +40,7 @@ Update the action.yml with your name, description, inputs and outputs for your a
 
 See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
 
-## Change the Code
+## The Code
 
 Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
 
@@ -97,7 +95,7 @@ git commit -a -m "v1 release"
 git push origin v1
 ```
 
-Your action is now published! :rocket:
+The action is now published! :rocket:
 
 See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
 
@@ -106,9 +104,9 @@ See the [versioning documentation](https://github.com/actions/toolkit/blob/maste
 You can now consume the action by referencing the v1 branch
 
 ```yaml
-uses: actions/javascript-action@v1
+uses: unthrottled/wmp-env-action@v1
 with:
-  milliseconds: 1000
+  release-type: non-prod
 ```
 
-See the [actions tab](https://github.com/actions/javascript-action/actions) for runs of this action! :rocket:
+See the [actions tab](https://github.com/Unthrottled/wmp-env-action/actions) for runs of this action! :rocket:
