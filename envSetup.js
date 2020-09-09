@@ -1,4 +1,6 @@
 const core = require('@actions/core');
+const github = require('@actions/github');
+const WebHooks = require('@octokit/webhooks');
 
 // RELEASE_NOTES
 
@@ -20,6 +22,18 @@ function getVersionAndPublishChannel(githubRef) {
   };
 }
 
+function getReleaseNotes() {
+  if(github.context.eventName === 'push') {
+    const pushPayload = github.context.payload
+    const commits = pushPayload.commits || []
+    return commits
+      .map(commit => `-${commit}`)
+      .join('\n');
+  }
+
+  return `- No release notes`
+}
+
 async function setUpNonProd() {
   const githubRef = requireNonNull(
     core.getInput('branch-override') || process.env.GITHUB_REF,
@@ -33,7 +47,7 @@ async function setUpNonProd() {
   core.exportVariable('VERSION', version);
   core.info(`And on channel${channel}`)
   core.exportVariable('PUBLISH_CHANNEL', channel);
-  const releaseNotes = 'ayylmao'
+  const releaseNotes = getReleaseNotes()
   core.info(`With release notes
   ${releaseNotes}`)
 }
