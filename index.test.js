@@ -11,13 +11,10 @@ describe('Set Environment', function () {
       .toThrow('Unknown environment ayyLmao, expecting \'non-prod\' or \'prod\'');
   });
 
-  // test('wait 500 ms', async () => {
-  //   const start = new Date();
-  //   await wait(500);
-  //   const end = new Date();
-  //   var delta = Math.abs(end - start);
-  //   expect(delta).toBeGreaterThanOrEqual(500);
-  // });
+  test('wait 500 ms', async () => {
+    await expect(envSetUp('non-prod')).resolves
+      .toBeUndefined()
+  });
 
 // shows how the runner will run a javascript action with env / stdout protocol
 //   test('test runs', () => {

@@ -7,25 +7,7 @@ const exec = require('@actions/exec');
 // PUBLISH_CHANNEL
 
 async function setUpNonProd() {
-  let myOutput = '';
-  let myError = '';
-
-  const options = {};
-  options.listeners = {
-    stdout: (data) => {
-      myOutput += data.toString();
-    },
-    stderr: (data) => {
-      myError += data.toString();
-    }
-  };
-
   await exec.exec('ls', ['-la']);
-
-  core.info(`Output:
-  ${myOutput}`)
-  core.info(`Err:
-  ${myError}`)
 }
 
 function setUpProd() {
