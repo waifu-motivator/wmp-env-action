@@ -3217,7 +3217,7 @@ function getReleaseNotes() {
     const pushPayload = github.context.payload
     const commits = pushPayload.commits || []
     return commits
-      .map(commit => `-${commit}`)
+      .map(commit => `-${JSON.stringify(commit, null, 2)}`)
       .join('\n');
   }
 
