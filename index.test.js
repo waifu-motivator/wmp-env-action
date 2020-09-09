@@ -1,7 +1,14 @@
 const envSetUp = require('./envSetup');
-// const process = require('process');
-// const cp = require('child_process');
-// const path = require('path');
+
+function getInputName(name) {
+  return `INPUT_${name.replace(/ /g, '_').toUpperCase()}`;
+}
+
+const unsetInput = (name)=>
+  delete process.env[getInputName(name)]
+
+const setInput = (name,value)=>
+  process.env[getInputName(name)]=value;
 
 describe('Set Environment', function () {
 
@@ -36,6 +43,17 @@ describe('Set Environment', function () {
     await expect(envSetUp('non-prod'))
       .rejects
       .toThrow('Expected the branch name ayylmao/development/v1.3 to match pattern refs/head/<releaseChannel>/<versionNumber')
+  });
+
+  test('non-prod should use override', async () => {
+    process.env.GITHUB_REF = 'refs/heads/development/v1.3'
+    setInput('branch-override', 'refs/heads/development/v69')
+    await expect(envSetUp('non-prod')).resolves
+      .toBeUndefined()
+    expect(process.env.ayylmao).toEqual('ayyLmao its a prank')
+    expect(process.env.VERSION).toEqual('v69')
+    expect(process.env.PUBLISH_CHANNEL).toEqual('development')
+    unsetInput('branch-override');
   });
 
   test('non-prod should setup correctly', async () => {

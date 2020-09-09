@@ -22,7 +22,7 @@ function getVersionAndPublishChannel(githubRef) {
 
 async function setUpNonProd() {
   const githubRef = requireNonNull(
-    process.env.GITHUB_REF,
+    core.getInput('branch-override') || process.env.GITHUB_REF,
     'Expected environment GITHUB_REF to be defined!'
   );
   const {

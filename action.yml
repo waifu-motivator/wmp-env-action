@@ -5,6 +5,9 @@ inputs:
     description: 'The environment to set up for'
     required: true
     default: 'non-prod'
+  branch-override:
+    description: 'Allows the action to use this value in place of the GITHUB_REF env'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'
