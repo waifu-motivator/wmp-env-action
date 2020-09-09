@@ -8,6 +8,8 @@ const exec = require('@actions/exec');
 
 async function setUpNonProd() {
   await exec.exec('ls', ['-la']);
+  core.info(`This is the environment variable ${process.env.GITHUB_REF}`)
+  core.exportVariable('ayylmao', 'ayyLmao');
 }
 
 function setUpProd() {

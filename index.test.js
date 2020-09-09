@@ -1,4 +1,5 @@
 const envSetUp = require('./envSetup');
+const core = require('@actions/core');
 // const process = require('process');
 // const cp = require('child_process');
 // const path = require('path');
@@ -11,9 +12,10 @@ describe('Set Environment', function () {
       .toThrow('Unknown environment ayyLmao, expecting \'non-prod\' or \'prod\'');
   });
 
-  test('wait 500 ms', async () => {
+  test('non-prod should setup correctly', async () => {
     await expect(envSetUp('non-prod')).resolves
       .toBeUndefined()
+    expect(process.env.ayylmao).toEqual('ayyLmao')
   });
 
 // shows how the runner will run a javascript action with env / stdout protocol
