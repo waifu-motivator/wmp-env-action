@@ -2,24 +2,80 @@ require('./sourcemap-register.js');module.exports =
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ 928:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const core = __webpack_require__(186);
+
+// RELEASE_NOTES
+
+function requireNonNull(toBeNotNull, message) {
+  if(!toBeNotNull) {
+    throw Error(message);
+  }
+  return toBeNotNull;
+}
+
+function getVersionAndPublishChannel(githubRef) {
+  const [,,channel,version] = githubRef.split('/');
+  if(!(channel && version)) {
+    throw Error(`Expected the branch name ${githubRef} to match pattern refs/head/<releaseChannel>/<versionNumber>`)
+  }
+  return {
+    channel,
+    version
+  };
+}
+
+async function setUpNonProd() {
+  const githubRef = requireNonNull(
+    process.env.GITHUB_REF,
+    'Expected environment GITHUB_REF to be defined!'
+  );
+  const {
+    version,
+    channel
+  } = getVersionAndPublishChannel(githubRef)
+  core.exportVariable('VERSION', version);
+  core.exportVariable('PUBLISH_CHANNEL', channel);
+  core.exportVariable('ayylmao', 'ayyLmao its a prank');
+}
+
+function setUpProd() {
+  throw Error('Production environment setup not available yet!');
+}
+
+const envSetup = async environmentToSetUp => {
+  switch (environmentToSetUp) {
+    case 'non-prod':
+      return setUpNonProd();
+    case 'prod':
+      return setUpProd();
+    default:
+      throw Error(`Unknown environment ${environmentToSetUp}, expecting 'non-prod' or 'prod'`)
+  }
+};
+
+module.exports = envSetup;
+
+
+/***/ }),
+
 /***/ 932:
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
 const core = __webpack_require__(186);
-const wait = __webpack_require__(258);
+const envSetUp = __webpack_require__(928);
 
 
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
+    const environmentToSetUp = core.getInput('release-type');
+    core.info(`Setting up environment for ${environmentToSetUp} ...`);
 
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
+    await envSetUp(environmentToSetUp);
 
-    core.setOutput('time', new Date().toTimeString());
   } catch (error) {
     core.setFailed(error.message);
   }
@@ -355,23 +411,6 @@ function getState(name) {
 }
 exports.getState = getState;
 //# sourceMappingURL=core.js.map
-
-/***/ }),
-
-/***/ 258:
-/***/ ((module) => {
-
-let wait = function (milliseconds) {
-  return new Promise((resolve) => {
-    if (typeof milliseconds !== 'number') {
-      throw new Error('milliseconds not a number');
-    }
-    setTimeout(() => resolve("done!"), milliseconds)
-  });
-};
-
-module.exports = wait;
-
 
 /***/ }),
 

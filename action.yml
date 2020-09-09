@@ -1,7 +1,7 @@
 name: 'Release Environment Setup'
 description: 'Sets up the environment for releasing the Waifu Motivator Plugin'
 inputs:
-  relase-type:
+  release-type:
     description: 'The environment to set up for'
     required: true
     default: 'non-prod'
