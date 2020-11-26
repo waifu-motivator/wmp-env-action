@@ -24,7 +24,11 @@ jobs:
       with:
         release-type: non-prod
         branch-override: refs/heads/development/v1.3
-    - run: ls -la
+  
+  verify:
+    needs: test
+    steps:
     - run: echo ${VERSION}
     - run: echo ${PUBLISH_CHANNEL}
     - run: echo ${RELEASE_NOTES}
+ 
