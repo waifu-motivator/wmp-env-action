@@ -28,13 +28,3 @@ jobs:
     - run: echo ${PUBLISH_CHANNEL}
     - run: echo ${RELEASE_NOTES}
   
-  verify:
-    runs-on: ubuntu-latest
-    steps:
-    - run: echo ${VERSION}
-    - run: echo ${PUBLISH_CHANNEL}
-    - run: echo ${RELEASE_NOTES}
-    - run: echo "action_state=yellow" >> $GITHUB_ENV
-    - run: ls -la
-    - run: echo $action_state
- 
