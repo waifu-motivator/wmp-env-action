@@ -26,6 +26,7 @@ jobs:
         branch-override: refs/heads/development/v1.3
   
   verify:
+    runs-on: ubuntu-latest
     needs: test
     steps:
     - run: echo ${VERSION}
