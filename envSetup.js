@@ -1,16 +1,18 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+const fs = require('fs');
+const {GITHUB_ENV_FILE_NAME} = require('./constants');
 
 function requireNonNull(toBeNotNull, message) {
-  if(!toBeNotNull) {
+  if (!toBeNotNull) {
     throw Error(message);
   }
   return toBeNotNull;
 }
 
 function getVersionAndPublishChannel(githubRef) {
-  const [,,channel,version] = githubRef.split('/');
-  if(!(channel && version)) {
+  const [, , channel, version] = githubRef.split('/');
+  if (!(channel && version)) {
     throw Error(`Expected the branch name ${githubRef} to match pattern refs/head/<releaseChannel>/<versionNumber>`)
   }
   return {
@@ -20,7 +22,7 @@ function getVersionAndPublishChannel(githubRef) {
 }
 
 function getReleaseNotes() {
-  if(github.context.eventName === 'push') {
+  if (github.context.eventName === 'push') {
     const pushPayload = github.context.payload
     const commits = pushPayload.commits || []
     return commits
@@ -30,6 +32,8 @@ function getReleaseNotes() {
 
   return `- No release notes`
 }
+
+
 
 async function setUpNonProd() {
   const githubRef = requireNonNull(
@@ -41,13 +45,19 @@ async function setUpNonProd() {
     channel
   } = getVersionAndPublishChannel(githubRef)
   core.info(`Releasing with version '${version}'`)
-  core.exportVariable('VERSION', version);
   core.info(`And on channel '${channel}'`)
-  core.exportVariable('PUBLISH_CHANNEL', channel);
   const releaseNotes = getReleaseNotes()
   core.info(`With release notes
   ${releaseNotes}`)
-  core.exportVariable('RELEASE_NOTES', releaseNotes)
+
+  fs.writeFileSync(GITHUB_ENV_FILE_NAME,
+    `
+VERSION=${version}
+PUBLISH_CHANNEL=${channel}
+RELEASE_NOTES=${releaseNotes}
+  `,
+    { encoding: 'utf-8' }
+  )
 }
 
 function setUpProd() {
