@@ -32,4 +32,6 @@ jobs:
     - run: echo ${VERSION}
     - run: echo ${PUBLISH_CHANNEL}
     - run: echo ${RELEASE_NOTES}
+    - run: echo "action_state=yellow" >> $GITHUB_ENV
+    - run: echo $action_state
  
