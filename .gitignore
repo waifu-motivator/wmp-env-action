@@ -1,5 +1,7 @@
 node_modules/
 
+$GITHUB_ENV
+
 # Editors
 .vscode/
 .idea/
