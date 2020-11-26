@@ -24,14 +24,17 @@ jobs:
       with:
         release-type: non-prod
         branch-override: refs/heads/development/v1.3
+    - run: echo ${VERSION}
+    - run: echo ${PUBLISH_CHANNEL}
+    - run: echo ${RELEASE_NOTES}
   
   verify:
     runs-on: ubuntu-latest
-    needs: test
     steps:
     - run: echo ${VERSION}
     - run: echo ${PUBLISH_CHANNEL}
     - run: echo ${RELEASE_NOTES}
     - run: echo "action_state=yellow" >> $GITHUB_ENV
+    - run: ls -la
     - run: echo $action_state
  
