@@ -54,7 +54,7 @@ async function setUpNonProd() {
     `
 VERSION=${version}
 PUBLISH_CHANNEL=${channel}
-RELEASE_NOTES="${releaseNotes}"
+RELEASE_NOTES=${releaseNotes.split('\n').map(line => `'${line}'`).join('\\\n')}
   `.trim(),
     { encoding: 'utf-8' }
   )
