@@ -1,16 +1,4 @@
 const envSetUp = require('./envSetup');
-const fs = require('fs');
-const {GITHUB_ENV_FILE_NAME} = require('./constants')
-
-function getInputName(name) {
-  return `INPUT_${name.replace(/ /g, '_').toUpperCase()}`;
-}
-
-const unsetInput = (name)=>
-  delete process.env[getInputName(name)]
-
-const setInput = (name,value)=>
-  process.env[getInputName(name)]=value;
 
 describe('Set Environment', function () {
 
@@ -21,12 +9,6 @@ describe('Set Environment', function () {
 
   beforeEach(()=>{
     process.env.GITHUB_REF = previousGitRef;
-  });
-
-  afterEach(() => {
-    if(fs.existsSync(GITHUB_ENV_FILE_NAME)) {
-      fs.unlinkSync(GITHUB_ENV_FILE_NAME)
-    }
   });
 
   afterAll(()=>{
@@ -53,23 +35,4 @@ describe('Set Environment', function () {
       .toThrow('Expected the branch name ayylmao/development/v1.3 to match pattern refs/head/<releaseChannel>/<versionNumber')
   });
 
-  test('non-prod should use override', async () => {
-    process.env.GITHUB_REF = 'refs/heads/development/v1.3'
-    setInput('branch-override', 'refs/heads/development/v69')
-    await expect(envSetUp('non-prod')).resolves
-      .toBeUndefined();
-    const envFile = fs.readFileSync(GITHUB_ENV_FILE_NAME, {encoding: 'utf-8'});
-    expect(envFile).toContain('VERSION=v69');
-    expect(envFile).toContain('PUBLISH_CHANNEL=development');
-    unsetInput('branch-override');
-  });
-
-  test('non-prod should setup correctly', async () => {
-    process.env.GITHUB_REF = 'refs/heads/development/v1.3'
-    await expect(envSetUp('non-prod')).resolves
-      .toBeUndefined();
-    const envFile = fs.readFileSync(GITHUB_ENV_FILE_NAME, {encoding: 'utf-8'});
-    expect(envFile).toContain('VERSION=v1.3');
-    expect(envFile).toContain('PUBLISH_CHANNEL=development');
-  });
 });

@@ -1,12 +1,9 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const fs = require('fs');
-const {GITHUB_ENV_FILE_NAME} = require('./constants');
 
 function requireNonNull(toBeNotNull, message) {
-  if (!toBeNotNull) {
-    throw Error(message);
-  }
+  if (!toBeNotNull) throw Error(message);
+
   return toBeNotNull;
 }
 
@@ -33,8 +30,6 @@ function getReleaseNotes() {
   return `- No release notes`
 }
 
-
-
 async function setUpNonProd() {
   const githubRef = requireNonNull(
     core.getInput('branch-override') || process.env.GITHUB_REF,
@@ -50,14 +45,9 @@ async function setUpNonProd() {
   core.info(`With release notes
   ${releaseNotes}`)
 
-  fs.writeFileSync(GITHUB_ENV_FILE_NAME,
-    `
-VERSION=${version}
-PUBLISH_CHANNEL=${channel}
-RELEASE_NOTES=${releaseNotes.split('\n').join("<br/>")}
-  `.trim(),
-    { encoding: 'utf-8' }
-  )
+  core.exportVariable('VERSION', version);
+  core.exportVariable('PUBLISH_CHANNEL', channel);
+  core.exportVariable('RELEASE_NOTES', releaseNotes.split('\n').join("<br/>"))
 }
 
 function setUpProd() {
