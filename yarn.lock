@@ -2,9 +2,12 @@
 # yarn lockfile v1
 
 
-"@actions/core@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.npmjs.org/@actions/core/-/core-1.4.0.tgz"
+"@actions/core@^1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@actions/core/-/core-1.9.1.tgz#97c0201b1f9856df4f7c3a375cdcdb0c2a2f750b"
+  dependencies:
+    "@actions/http-client" "^2.0.1"
+    uuid "^8.3.2"
 
 "@actions/exec@^1.1.0":
   version "1.1.0"
@@ -26,6 +29,12 @@
   resolved "https://registry.npmjs.org/@actions/http-client/-/http-client-1.0.11.tgz"
   dependencies:
     tunnel "0.0.6"
+
+"@actions/http-client@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@actions/http-client/-/http-client-2.0.1.tgz#873f4ca98fe32f6839462a6f046332677322f99c"
+  dependencies:
+    tunnel "^0.0.6"
 
 "@actions/io@^1.0.1":
   version "1.1.1"
@@ -2517,7 +2526,7 @@ tr46@^2.0.2:
   dependencies:
     punycode "^2.1.1"
 
-tunnel@0.0.6:
+tunnel@0.0.6, tunnel@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npmjs.org/tunnel/-/tunnel-0.0.6.tgz"
 
@@ -2564,6 +2573,10 @@ uri-js@^4.2.2:
   resolved "https://registry.npmjs.org/uri-js/-/uri-js-4.4.1.tgz"
   dependencies:
     punycode "^2.1.0"
+
+uuid@^8.3.2:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
 
 v8-compile-cache@^2.0.3:
   version "2.3.0"
