@@ -763,17 +763,17 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@octokit/webhooks-methods/-/webhooks-methods-3.0.0.tgz#4f4443605233f46abc5f85a857ba105095aa1181"
 
-"@octokit/webhooks-types@6.4.0":
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/@octokit/webhooks-types/-/webhooks-types-6.4.0.tgz#896bfd930e61f479356cd7d436a238191539afd9"
+"@octokit/webhooks-types@6.6.0":
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/@octokit/webhooks-types/-/webhooks-types-6.6.0.tgz#8f6e15aca2d42f7310ffbe8b8f1799ee206dc1df"
 
-"@octokit/webhooks@^10.2.0":
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/@octokit/webhooks/-/webhooks-10.2.0.tgz#e91082b810996a6526a817021973bf57f1120a02"
+"@octokit/webhooks@^10.3.1":
+  version "10.3.1"
+  resolved "https://registry.yarnpkg.com/@octokit/webhooks/-/webhooks-10.3.1.tgz#a0d0d41873fe6f16cad89a893933a96ad3dc74a6"
   dependencies:
     "@octokit/request-error" "^3.0.0"
     "@octokit/webhooks-methods" "^3.0.0"
-    "@octokit/webhooks-types" "6.4.0"
+    "@octokit/webhooks-types" "6.6.0"
     aggregate-error "^3.1.0"
 
 "@sinclair/typebox@^0.24.1":
