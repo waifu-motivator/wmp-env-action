@@ -767,9 +767,9 @@
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/@octokit/webhooks-types/-/webhooks-types-6.7.0.tgz#5fae3f6d92befcb8224a8c19a18d9d90e59f095d"
 
-"@octokit/webhooks@^10.4.0":
-  version "10.4.0"
-  resolved "https://registry.yarnpkg.com/@octokit/webhooks/-/webhooks-10.4.0.tgz#b844a3a220690b0d104488e8f1229289d5169239"
+"@octokit/webhooks@^10.5.1":
+  version "10.5.1"
+  resolved "https://registry.yarnpkg.com/@octokit/webhooks/-/webhooks-10.5.1.tgz#a8307bac6da324ee52c1a30db300d8647d07373f"
   dependencies:
     "@octokit/request-error" "^3.0.0"
     "@octokit/webhooks-methods" "^3.0.0"
