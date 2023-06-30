@@ -706,6 +706,10 @@
   version "12.11.0"
   resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-12.11.0.tgz#da5638d64f2b919bca89ce6602d059f1b52d3ef0"
 
+"@octokit/openapi-types@^18.0.0":
+  version "18.0.0"
+  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-18.0.0.tgz#f43d765b3c7533fd6fb88f3f25df079c24fccf69"
+
 "@octokit/openapi-types@^7.0.0":
   version "7.0.0"
   resolved "https://registry.npmjs.org/@octokit/openapi-types/-/openapi-types-7.0.0.tgz"
@@ -731,11 +735,11 @@
     deprecation "^2.0.0"
     once "^1.4.0"
 
-"@octokit/request-error@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@octokit/request-error/-/request-error-3.0.0.tgz#f527d178f115a3b62d76ce4804dd5bdbc0270a81"
+"@octokit/request-error@^4.0.0":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@octokit/request-error/-/request-error-4.0.2.tgz#0e16802f3e688e1dd6807e81c7810f419b2c530d"
   dependencies:
-    "@octokit/types" "^6.0.3"
+    "@octokit/types" "^10.0.0"
     deprecation "^2.0.0"
     once "^1.4.0"
 
@@ -761,6 +765,12 @@
     node-fetch "^2.6.7"
     universal-user-agent "^6.0.0"
 
+"@octokit/types@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-10.0.0.tgz#7ee19c464ea4ada306c43f1a45d444000f419a4a"
+  dependencies:
+    "@octokit/openapi-types" "^18.0.0"
+
 "@octokit/types@^6.0.3", "@octokit/types@^6.7.1":
   version "6.14.2"
   resolved "https://registry.npmjs.org/@octokit/types/-/types-6.14.2.tgz"
@@ -773,21 +783,21 @@
   dependencies:
     "@octokit/openapi-types" "^12.11.0"
 
-"@octokit/webhooks-methods@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@octokit/webhooks-methods/-/webhooks-methods-3.0.0.tgz#4f4443605233f46abc5f85a857ba105095aa1181"
+"@octokit/webhooks-methods@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@octokit/webhooks-methods/-/webhooks-methods-4.0.0.tgz#d1697930ba3d8e6b6d0f8a2c996bb440d2e1df1b"
 
-"@octokit/webhooks-types@6.11.0":
-  version "6.11.0"
-  resolved "https://registry.yarnpkg.com/@octokit/webhooks-types/-/webhooks-types-6.11.0.tgz#1fb903bff3f2883490d6ba88d8cb8f8a55f68176"
+"@octokit/webhooks-types@7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@octokit/webhooks-types/-/webhooks-types-7.1.0.tgz#d533dea253416e02dd6c2bfab25e533295bd5d3f"
 
-"@octokit/webhooks@^11.0.0":
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/@octokit/webhooks/-/webhooks-11.0.0.tgz#5e77d9eb13e72a190fcdc68cbf6da85f05144be6"
+"@octokit/webhooks@^12.0.2":
+  version "12.0.2"
+  resolved "https://registry.yarnpkg.com/@octokit/webhooks/-/webhooks-12.0.2.tgz#eb5a7ce256f606a0ee3cc120d28f9438e8af8ee8"
   dependencies:
-    "@octokit/request-error" "^3.0.0"
-    "@octokit/webhooks-methods" "^3.0.0"
-    "@octokit/webhooks-types" "6.11.0"
+    "@octokit/request-error" "^4.0.0"
+    "@octokit/webhooks-methods" "^4.0.0"
+    "@octokit/webhooks-types" "7.1.0"
     aggregate-error "^3.1.0"
 
 "@sinclair/typebox@^0.25.16":
